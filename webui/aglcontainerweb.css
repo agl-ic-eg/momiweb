@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.container-item{
+    width: 18%;
+    margin: auto auto;
+}
+.container-item-img{
+    border: 1px solid #ccc;
+}
+.container-item-img img{
+    display: block;
+    height: 18%;
+    object-fit: cover;
+    width: 100%;
+}
+.ic-arch{
+    width: 50%;
+    height: auto;
+}
