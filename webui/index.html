@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type=""text/css" href="aglcontainerweb.css" />
+<link rel="stylesheet" type="text/css" href="aglcontainerweb.css" />
 <title>Automotive Grade Linux Container Demo</title>
 </head>
 <body>
@@ -14,7 +14,7 @@
 <p>
      <center><h2> Click to your favorite IVI </h2></center>
 </p>
-<div class="container">
+<div class="container-ivi">
      <div class="container-item">
           <div class="container-item-img">
                <img src="image/qtlogo.png" alt="Automotive Grade Linux" onclick="QtClick()">
@@ -43,37 +43,77 @@
           </div>
           <h4><b>MOMI IVI</b></h4>
      </div>
+</div>
+<p>
+     <center><h2> Which one do you prefer? </h2></center>
+</p>
+<div class="container-control">
      <div class="container-item">
           <div class="container-item-img">
-               <img src="image/bomb.png" alt="Automotive Grade Linux" onclick="BombClick()">
+               <img id="bomb" src="image/bomb.png" alt="Automotive Grade Linux" onclick="BombClick()">
           </div>
           <h4><b>IVI Crash!!</b></h4>
      </div>
 </div>
 <p>
+<table id="guest_table">
+</table>
 <center>
      <img class="ic-arch" src="image/agl-container-demo.png" >
 </center>
 </p>
 <script>
 function QtClick(){
-     const res = fetch("http://192.168.10.124/cgi-bin/qt.cgi");
+     const res = fetch("cgi-bin/qt.cgi");
      console.log(res)
 }
 function HTML5Click(){
-     const res = fetch("http://192.168.10.124/cgi-bin/html5.cgi");
+     const res = fetch("cgi-bin/html5.cgi");
      console.log(res)
 }
 function FlutterClick(){
-     const res = fetch("http://192.168.10.124/cgi-bin/flutter.cgi");
+     const res = fetch("cgi-bin/flutter.cgi");
      console.log(res)
 }
 function MomiClick(){
-     const res = fetch("http://192.168.10.124/cgi-bin/momi.cgi");
+     const res = fetch("cgi-bin/momi.cgi");
      console.log(res)
 }
+setTimeout(StatusGet, 1000);
+function StatusGet(){
+     fetch("cgi-bin/status.cgi")
+          .then(response => response.text())
+          .then(
+               data => {
+                    ShowGuestStatus(data);
+               }
+          );
+
+     setTimeout(StatusGet, 1000);
+}
+
+function ShowGuestStatus(jsondata){
+     var status = JSON.parse(jsondata);
+     var table = document.getElementById("guest_table");
+     var table_conut = table.rows.length;
+     for(var i=0; i < table_conut;i++) {
+          table.deleteRow(-1);
+     }
+
+     var row_count = status["guest-status"].length;
+     for(var i=0; i < row_count;i++) {
+          var rows = table.insertRow(-1);
+          var cell = rows.insertCell(-1);
+          cell.innerHTML = status["guest-status"][i]["guest-name"];
+          var cell = rows.insertCell(-1);
+          cell.innerHTML = status["guest-status"][i]["role-name"];
+          var cell = rows.insertCell(-1);
+          cell.innerHTML = status["guest-status"][i]["status"];
+     }
+     console.log(jsondata);
+}
 function BombClick(){
-     const res = fetch("http://192.168.10.124/cgi-bin/bomb.cgi");
+     const res = fetch("cgi-bin/bomb.cgi");
      console.log(res)
 }
 </script>

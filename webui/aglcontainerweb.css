@@ -1,4 +1,13 @@
-.container{
+.container-ivi{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+/*
+    border: thin solid rgb(220, 255, 220);
+    border-width: 1px 4px 4px 1px;
+*/
+}
+.container-control{
     display: flex;
     justify-content: space-around;
     text-align: center;
@@ -8,7 +17,6 @@
     margin: auto auto;
 }
 .container-item-img{
-    border: 1px solid #ccc;
 }
 .container-item-img img{
     display: block;
