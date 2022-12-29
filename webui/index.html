@@ -5,17 +5,19 @@
 <link rel="stylesheet" type="text/css" href="aglcontainerweb.css" />
 <title>Automotive Grade Linux Container Demo</title>
 </head>
-<body>
+<body bgcolor="white">
 <p>
-<center>
-<img src="image/agllogo.png" alt="Automotive Grade Linux">
-</center>
+<div class="container-demo">
+<div class="container-agllogo">
+     <img src="image/agllogo.png" alt="Automotive Grade Linux">
+</div>
 </p>
-<p>
-     <center><h2> Click to your favorite IVI </h2></center>
-</p>
+<div class="container-allitem">
+<div>
+<center><h2> Click to your favorite IVI </h2></center>
+</div>
 <div class="container-ivi">
-     <div class="container-item">
+     <div class="container-item" id="agl-qt-ivi-demo">
           <div class="container-item-img">
                <img src="image/qtlogo.png" alt="Automotive Grade Linux" onclick="QtClick()">
           </div>
@@ -23,13 +25,13 @@
           <h4><b>Qt Based IVI</b></h4>
           </center>
      </div>
-     <div class="container-item">
+     <div class="container-item" id="agl-html5-ivi-demo">
           <div class="container-item-img">
                <img src="image/html5logo.png" alt="Automotive Grade Linux" onclick="HTML5Click()">
           </div>
           <h4><b>HTML5 Based IVI</b></h4>
      </div>
-     <div class="container-item">
+     <div class="container-item" id="agl-flutter-ivi-demo">
           <div class="container-item-img">
                <img src="image/flutterlogo.png" alt="Automotive Grade Linux" onclick="FlutterClick()">
           </div>
@@ -37,47 +39,35 @@
           <h4><b>Flutter Based IVI</b></h4>
           </center>
      </div>
-     <div class="container-item">
+     <div class="container-item" id="agl-momi-ivi-demo">
           <div class="container-item-img">
                <img src="image/momilogo.png" alt="Automotive Grade Linux" onclick="MomiClick()">
           </div>
           <h4><b>MOMI IVI</b></h4>
      </div>
 </div>
-<p>
-     <center><h2> Which one do you prefer? </h2></center>
-</p>
+</div>
 <div class="container-control">
-     <div class="container-item">
+     <div class="container-bomb">
           <div class="container-item-img">
                <img id="bomb" src="image/bomb.png" alt="Automotive Grade Linux" onclick="BombClick()">
           </div>
-          <h4><b>IVI Crash!!</b></h4>
      </div>
 </div>
-<p>
-<table id="guest_table">
-</table>
-<center>
-     <img class="ic-arch" src="image/agl-container-demo.png" >
-</center>
-</p>
+
+</div>
 <script>
 function QtClick(){
      const res = fetch("cgi-bin/qt.cgi");
-     console.log(res)
 }
 function HTML5Click(){
      const res = fetch("cgi-bin/html5.cgi");
-     console.log(res)
 }
 function FlutterClick(){
      const res = fetch("cgi-bin/flutter.cgi");
-     console.log(res)
 }
 function MomiClick(){
      const res = fetch("cgi-bin/momi.cgi");
-     console.log(res)
 }
 setTimeout(StatusGet, 1000);
 function StatusGet(){
@@ -91,30 +81,31 @@ function StatusGet(){
 
      setTimeout(StatusGet, 1000);
 }
-
 function ShowGuestStatus(jsondata){
      var status = JSON.parse(jsondata);
-     var table = document.getElementById("guest_table");
-     var table_conut = table.rows.length;
-     for(var i=0; i < table_conut;i++) {
-          table.deleteRow(-1);
-     }
 
      var row_count = status["guest-status"].length;
      for(var i=0; i < row_count;i++) {
-          var rows = table.insertRow(-1);
-          var cell = rows.insertCell(-1);
-          cell.innerHTML = status["guest-status"][i]["guest-name"];
-          var cell = rows.insertCell(-1);
-          cell.innerHTML = status["guest-status"][i]["role-name"];
-          var cell = rows.insertCell(-1);
-          cell.innerHTML = status["guest-status"][i]["status"];
+          var name = status["guest-status"][i]["guest-name"];
+          var stat = status["guest-status"][i]["status"];
+          var elem = document.getElementById(name);
+
+          if (elem != null) {
+               if (stat == "started") {
+                    elem.style.borderColor ="#c8ffc8";
+               } else if (stat == "shutdown") {
+                    elem.style.borderColor ="#c8c8ff";
+               } else if (stat == "dead") {
+                    elem.style.borderColor ="#ff8080";
+               } else {
+                    elem.style.borderColor ="#808080";
+               }
+          }
      }
-     console.log(jsondata);
 }
+
 function BombClick(){
      const res = fetch("cgi-bin/bomb.cgi");
-     console.log(res)
 }
 </script>
 
