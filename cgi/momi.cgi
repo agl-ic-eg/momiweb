@@ -1,3 +1,5 @@
 #!/bin/sh -xv
 echo "Content-type: text/html"
-cmcontrol --force-reboot-guest-role=ivi && echo "Status: 200"
+cmcontrol --change-active-guest-name=agl-momi-ivi-demo
+cmcontrol --shutdown-guest-role=ivi
+echo "Status: 200"
