@@ -44,10 +44,16 @@
                <h4 class="container-item-txt"><b>AGL MOMI IVI Demo</b></h4>
           </div>
      </div>
+     <div class="container-item" id="agl-momi-ivi-demo-res" onclick="SafeMomiClick()">
+          <div class="container-item-box">
+               <img class="container-item-img" src="image/momilogo.png" alt="Automotive Grade Linux">
+               <h4 class="container-item-txt"><b>Safe AGL MOMI IVI Demo</b></h4>
+          </div>
+     </div>
 </div>
 </div>
-<div class="container-control">
-     <img class="container-bomb" id="bomb" src="image/bomb.png" alt="Automotive Grade Linux" onclick="BombClick()">
+<div class="container-control" onclick="BombClick()">
+     <img class="container-bomb" id="bomb" src="image/bomb.png" alt="Automotive Grade Linux">
 </div>
 </div>
 </p>
@@ -63,6 +69,9 @@ function FlutterClick(){
 }
 function MomiClick(){
      const res = fetch("cgi-bin/momi.cgi");
+}
+function SafeMomiClick(){
+     const res = fetch("cgi-bin/safemomi.cgi");
 }
 setTimeout(StatusGet, 1000);
 function StatusGet(){
