@@ -17,62 +17,48 @@
 <p>
 <div class="container-allitem">
 <div>
-<center><h2> Container exchange demo </h2></center>
+<center><h2> Resource control demo </h2></center>
 <center><h3>
-Click to your favorite IVI.<br>
-Will shutdown existing IVI gust and launch your favorite IVI.<br>
+When you push gear icon on momiscreen, mom ivi will cause heavy load status.<br>
 </h3></center>
 </div>
 <div class="container-ivi">
-     <div class="container-item" id="agl-qt-ivi-demo" onclick="QtClick()">
-          <div class="container-item-box">
-               <img class="container-item-img" src="image/qtlogo.png" alt="Automotive Grade Linux">
-               <h4 class="container-item-txt"><b>AGL Qt IVI Demo</b></h4>
-          </div>
-     </div>
-     <div class="container-item" id="agl-html5-ivi-demo" onclick="HTML5Click()">
-          <div class="container-item-box">
-               <img class="container-item-img" src="image/html5logo.png" alt="Automotive Grade Linux">
-               <h4 class="container-item-txt"><b>AGL HTML5 IVI Demo</b></h4>
-          </div>
-     </div>
-     <div class="container-item" id="agl-flutter-ivi-demo" onclick="FlutterClick()"">
-          <div class="container-item-box">
-               <img class="container-item-img" src="image/flutterlogo.png" alt="Automotive Grade Linux">
-               <h4 class="container-item-txt"><b>AGL Flutter IVI Demo</b></h4>
-          </div>
-     </div>
      <div class="container-item" id="agl-momi-ivi-demo" onclick="MomiClick()">
           <div class="container-item-box">
                <img class="container-item-img" src="image/momilogo.png" alt="Automotive Grade Linux">
-               <h4 class="container-item-txt"><b>AGL MOMI IVI Demo</b></h4>
+               <h4 class="container-item-txt"><b>AGL MOMI IVI Demo</b><br><br>If container manager was not control cpu resource, instrument cluster will slow down.<br>It's unsafe.</h4>
+          </div>
+     </div>
+     <div class="container-item" id="agl-momi-ivi-demo-res" onclick="SafeMomiClick()">
+          <div class="container-item-box">
+               <img class="container-item-img" src="image/momilogo_s.png" alt="Automotive Grade Linux">
+               <h4 class="container-item-txt"><b>Safe AGL MOMI IVI Demo</b><br><br>If container manager was not control cpu resource, instrument cluster will keep stable behavior.<br>It's safe.</h4>
           </div>
      </div>
 </div>
 </div>
-<div class="container-control" onclick="BombClick()">
-     <img class="container-bomb" id="bomb" src="image/bomb.png" alt="Automotive Grade Linux">
-     <center><h3>
-          If IVI was clashed, will reboot quicklly.<br>
-     </h3></center>
+<div class="cpu-usage">
+     <div class="cpu-usage-sub">
+     <div><label for="cpu0">cpu0:</label><br><progress class="cpu-progress" id="cpu0" max="100" value="0"></progress></div>
+     <div><label for="cpu1">cpu1:</label><br><progress class="cpu-progress" id="cpu1" max="100" value="0"></progress></div>
+     <div><label for="cpu2">cpu2:</label><br><progress class="cpu-progress" id="cpu2" max="100" value="0"></progress></div>
+     <div><label for="cpu3">cpu3:</label><br><progress class="cpu-progress" id="cpu3" max="100" value="0"></progress></div>
+     </div>
+     <div class="cpu-usage-sub">
+     <div><label for="cpu4">cpu4:</label><br><progress class="cpu-progress" id="cpu4" max="100" value="0"></progress></div>
+     <div><label for="cpu5">cpu5:</label><br><progress class="cpu-progress" id="cpu5" max="100" value="0"></progress></div>
+     <div><label for="cpu6">cpu6:</label><br><progress class="cpu-progress" id="cpu6" max="100" value="0"></progress></div>
+     <div><label for="cpu7">cpu7:</label><br><progress class="cpu-progress" id="cpu7" max="100" value="0"></progress></div>
+     </div>
 </div>
 </div>
 </p>
 <p>
 <center>
-Demo change.<a href="index_s.html"><img class="demochange-img" src="image/demo_change.png" alt="Demo change"></a>
+<a href="index.html"><img class="demochange-img" src="image/demo_change.png" alt="Demo change"></a>Demo change.
 </center>
 </p>
 <script>
-function QtClick(){
-     const res = fetch("cgi-bin/qt.cgi");
-}
-function HTML5Click(){
-     const res = fetch("cgi-bin/html5.cgi");
-}
-function FlutterClick(){
-     const res = fetch("cgi-bin/flutter.cgi");
-}
 function MomiClick(){
      const res = fetch("cgi-bin/momi.cgi");
 }
@@ -86,6 +72,13 @@ function StatusGet(){
           .then(
                data => {
                     ShowGuestStatus(data);
+               }
+          );
+     fetch("cgi-bin/cpu.cgi")
+          .then(response => response.text())
+          .then(
+               data => {
+                    ShowCpuUsage(data);
                }
           );
      setTimeout(StatusGet, 1000);
