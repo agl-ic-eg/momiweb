@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<link rel="stylesheet" href="container-exchange.css" type="text/css">
+<title>Container Exchange</title>
+</head>
+<body id="container-exchange">
+<p>
+<h3> Container exchange demo </h3>
+<h5>
+Click to your favorite IVI.<br>
+Will shutdown existing IVI gust and launch your favorite IVI.<br>
+</h5>
+<div class="guest-selector">
+	<div>
+		<iframe id="content" frameborder="no" src="agl-qt-ivi.html"></iframe>
+	</div>
+	<ul>
+		<li><img id="agl-qt-ivi-demo" src="image/qtlogo.png" class="thumb" data-url="agl-qt-ivi.html"></li>
+		<li><img id="agl-flutter-ivi-demo-simple" src="image/flutterlogo-octpus.png" class="thumb" data-url="agl-flutter-ivi-octpus.html"></li>
+		<li><img id="agl-flutter-ivi-demo" src="image/flutterlogo.png" class="thumb" data-url="agl-flutter-ivi-latest.html"></li>
+		<li><img id="agl-html5-ivi-demo" src="image/html5logo.png" class="thumb" data-url="agl-html5-ivi.html"></li>
+		<li><img id="agl-momi-ivi-demo" src="image/momilogo.png" class="thumb" data-url="agl-momi-ivi.html"></li>
+	</ul>
+</div>
+</p>
+
+<script>
+const thumbs = document.querySelectorAll('.thumb');
+    console.log(thumbs);
+    thumbs.forEach(function(item,index){
+        item.onclick = function(){
+            document.getElementById('content').src = this.dataset.url;
+        }
+    });
+setTimeout(StatusGet, 1000);
+function StatusGet(){
+     fetch("cgi-bin/status.cgi")
+          .then(response => response.text())
+          .then(
+               data => {
+                    ShowGuestStatus(data);
+               }
+          );
+     setTimeout(StatusGet, 1000);
+}
+function ShowGuestStatus(jsondata){
+     var status = JSON.parse(jsondata);
+
+     var row_count = status["guest-status"].length;
+     for(var i=0; i < row_count;i++) {
+          var name = status["guest-status"][i]["guest-name"];
+          var stat = status["guest-status"][i]["status"];
+          var elem = document.getElementById(name);
+
+          if (elem != null) {
+               if (stat == "started") {
+                    elem.style.backgroundColor ="#e0ffe0";
+                    elem.style.borderColor ="#e0ffe0";
+               } else if (stat == "shutdown") {
+                    elem.style.backgroundColor ="#b8c8ff";
+                    elem.style.borderColor ="#b8c8ff";
+               } else if (stat == "dead") {
+                    elem.style.backgroundColor ="#ff8080";
+                    elem.style.borderColor ="#ff8080";
+               } else {
+                    elem.style.backgroundColor ="#e0e0e0";
+                    elem.style.borderColor ="#e0e0e0";
+               }
+          }
+     }
+}
+
+function BombClick(){
+     const res = fetch("cgi-bin/bomb.cgi");
+}
+</script>
+
+</body>
+</html>

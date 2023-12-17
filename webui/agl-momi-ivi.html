@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<link rel="stylesheet" href="agl-guest-info.css" type="text/css">
+<title>AGL Momi IVI Demo</title>
+</head>
+<body>
+<div class="guest-info">
+	<div>
+		<img src="image/momiy.png" onclick="MomiClick()">
+		<img src="image/key-momi.png">
+	</div>
+	<div>
+		<h4>AGL Momi IVI Demo</h4>
+		AGL Momi IVI Demo is a most simple IVI demo.<br>
+		AGL Momi IVI Demo is created to use container environment evaluation.<br>
+		<h4>Demo applications:</h4>
+		<ul>
+			<li>Media Player</li>
+			<li>Navigation (Mapbox)</li>
+		</ul>
+	</div>
+</div>
+<script>
+function MomiClick(){
+     const res = fetch("cgi-bin/momi.cgi");
+}
+function SafeMomiClick(){
+     const res = fetch("cgi-bin/safemomi.cgi");
+}
+</script>
+</body>
+</html>

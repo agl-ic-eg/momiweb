@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<link rel="stylesheet" href="agl-guest-info.css" type="text/css">
+<title>AGL Flutter IVI Demo(Latest)</title>
+</head>
+<body>
+<div class="guest-info">
+	<div>
+		<img src="image/flutterlogo.png" onclick="FlutterClick()">
+		<img src="image/key-flutter-latest.png">
+	</div>
+	<div>
+		<h4>AGL Qt Flutter Demo (Latest)</h4>
+		AGL Flutter IVI Demo is a most recent IVI demo.<br>
+		AGL Flutter support is contributed by TOYOTA MOTOR CORPORATION.  This UI design is the most modern design that achieve using flutter.<br>
+		<h4>Demo applications:</h4>
+		<ul>
+		</ul>
+	</div>
+</div>
+<script>
+function FlutterClick(){
+     const res = fetch("cgi-bin/flutter.cgi");
+}
+</script>
+</body>
+</html>

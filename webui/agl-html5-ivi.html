@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<link rel="stylesheet" href="agl-guest-info.css" type="text/css">
+<title>AGL HTML5 IVI Demo</title>
+</head>
+<body>
+<div class="guest-info">
+	<div>
+		<img src="image/html5logo.png" onclick="HTML5Click()">
+		<img src="image/key-html5.png">
+	</div>
+	<div>
+		<h4>AGL HTML5 IVI Demo</h4>
+		AGL HTML5 IVI Demo is web based UI design IVI demo.<br>
+		AGL HTML5 support is migrating to Chromium Embedded Framework from WebOS in next release. <br>
+		<h4>Demo applications:</h4>
+		<ul>
+			<li>HTML5 Media Player</li>
+			<li>HTML5 Dashboard</li>
+			<li>HTML5 HVAC</li>
+			<li>Youtube</li>
+			<li>Aquarium</li>
+		</ul>
+	</div>
+</div>
+<script>
+function HTML5Click(){
+     const res = fetch("cgi-bin/html5.cgi");
+}
+</script>
+</body>
+</html>

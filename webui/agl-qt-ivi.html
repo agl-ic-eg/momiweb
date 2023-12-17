@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<link rel="stylesheet" href="agl-guest-info.css" type="text/css">
+<title>AGL Qt IVI Demo</title>
+</head>
+<body>
+<div class="guest-info">
+	<div>
+		<img src="image/qtlogo.png" onclick="QtClick()">
+		<img src="image/key-qt.png">
+	</div>
+	<div>
+		<h4>AGL Qt IVI Demo</h4>
+		AGL Qt IVI Demo is a most historical IVI demo.<br>
+		That design was created at Charming Chinook (CC) in y2017.  This demo is most famous demo for AGL.<br>
+		<h4>Demo applications:</h4>
+		<ul>
+			<li>Media Player</li>
+			<li>Dashboard</li>
+			<li>HVAC</li>
+			<li>Voice Navigation</li>
+			<li>Phone</li>
+			<li>Radio</li>
+			<li>Setting</li>
+		</ul>
+	</div>
+</div>
+<script>
+function QtClick(){
+     const res = fetch("cgi-bin/qt.cgi");
+}
+</script>
+</body>
+</html>

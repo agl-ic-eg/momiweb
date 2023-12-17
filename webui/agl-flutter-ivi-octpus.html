@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<link rel="stylesheet" href="agl-guest-info.css" type="text/css">
+<title>AGL Flutter IVI Demo(Octopus)</title>
+</head>
+<body>
+<div class="guest-info">
+	<div>
+		<img src="image/flutterlogo-octpus.png" onclick="FlutterClick()">
+		<img src="image/key-flutter-octpus.png">
+	</div>
+	<div>
+		<h4>AGL Flutter IVI Demo (Octopus)</h4>
+		AGL Flutter IVI Demo is a most progressive IVI demo.<br>
+		AGL Flutter support is contributed by TOYOTA MOTOR CORPORATION.  This demo is most interesting demo for AGL.<br>
+		<h4>Demo applications:</h4>
+		<ul>
+			<li>Media Player (Qt)</li>
+			<li>Dashboard (flutter)</li>
+			<li>HVAC (flutter)</li>
+			<li>Voice Navigation (Qt)</li>
+			<li>Phone (Qt)</li>
+			<li>Radio (Qt)</li>
+			<li>Setting (Qt)</li>
+		</ul>
+	</div>
+</div>
+<script>
+function FlutterClick(){
+     const res = fetch("cgi-bin/flutter.cgi");
+}
+</script>
+</body>
+</html>

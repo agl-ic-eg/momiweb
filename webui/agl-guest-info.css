@@ -1,0 +1,13 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+.guest-info {
+    display:flex;
+}
+.guest-info div {
+    width: 40%;
+}
+.guest-info img {
+    width: 90%;
+}

@@ -3,142 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="aglcontainerwebm.css" type="text/css" media="screen and (max-width:740px)">
-<link rel="stylesheet" href="aglcontainerweb.css" type="text/css" media="screen and (min-width:740px)">
+<link rel="stylesheet" href="aglcontainerweb.css" type="text/css">
 <title>Automotive Grade Linux Container Demo</title>
 </head>
-<body bgcolor="white">
-<p>
+<body class="backgroundall">
 <div class="container-demo">
-<div class="container-agllogo">
-     <img class="img-agllogo" src="image/agllogo.png" alt="Automotive Grade Linux">
+	<div class="container-lflogo">
+	<img class="img-lflogo" src="image/lfprojects_banner_other.svg" alt="The Linux foundation" />
+	</div>
+	<div class="container-agllogo">
+	<img class="img-agllogo" src="image/logo_agl_horizontal_white.svg" alt="Automotive Grade Linux" />
+	</div>
 </div>
-</p>
-<p>
-<div class="container-allitem">
-<div>
-<center><h2> Container exchange demo </h2></center>
-<center><h3>
-Click to your favorite IVI.<br>
-Will shutdown existing IVI gust and launch your favorite IVI.<br>
-</h3></center>
+<div class="momiwebtab" id="momiwebtab">
+	<div class="momiwebtab-in" id="momiwebtab1">
+		<a class="momiwebtab-elem" href="#momitab1"  onclick="changeTab()">Container Exchange</a>
+	</div>
+	<div class="momiwebtab-in" id="momiwebtab2">
+		<a class="momiwebtab-elem" href="#momitab2" onclick="changeTab()">Resource Control</a>
+	</div>
+	<div class="momiwebtab-in" id="momiwebtab3">
+		<a class="momiwebtab-elem" href="#momitab3" onclick="changeTab()">Demo Infomation</a>
+	</div>
 </div>
-<div class="container-ivi">
-     <div class="container-item" id="agl-qt-ivi-demo" onclick="QtClick()">
-          <div class="container-item-box">
-               <img class="container-item-img" src="image/qtlogo.png" alt="Automotive Grade Linux">
-               <h4 class="container-item-txt"><b>AGL Qt IVI Demo</b></h4>
-          </div>
-     </div>
-     <div class="container-item" id="agl-html5-ivi-demo" onclick="HTML5Click()">
-          <div class="container-item-box">
-               <img class="container-item-img" src="image/html5logo.png" alt="Automotive Grade Linux">
-               <h4 class="container-item-txt"><b>AGL HTML5 IVI Demo</b></h4>
-          </div>
-     </div>
-     <div class="container-item" id="agl-flutter-ivi-demo" onclick="FlutterClick()"">
-          <div class="container-item-box">
-               <img class="container-item-img" src="image/flutterlogo.png" alt="Automotive Grade Linux">
-               <h4 class="container-item-txt"><b>AGL Flutter IVI Demo</b></h4>
-          </div>
-     </div>
-     <div class="container-item" id="agl-momi-ivi-demo" onclick="MomiClick()">
-          <div class="container-item-box">
-               <img class="container-item-img" src="image/momilogo.png" alt="Automotive Grade Linux">
-               <h4 class="container-item-txt"><b>AGL MOMI IVI Demo</b></h4>
-          </div>
-     </div>
+<div class="momiwebtabbody" id="momiwebtabbody">
+	<div class="momiwebtabbody-in" id="momitab1">
+		<iframe class="momitab-content" title="Container exchange" frameborder="no" src="container-exchange.html"></iframe>
+	</div>
+	<div class="momiwebtabbody-in" id="momitab2">
+		<iframe class="momitab-content" title="Container exchange" frameborder="no" src="resource-control.html"></iframe>
+	</div>
+	<div class="momiwebtabbody-in" id="momitab3">
+	</div>
 </div>
-</div>
-<div class="container-control" onclick="BombClick()">
-     <img class="container-bomb" id="bomb" src="image/bomb.png" alt="Automotive Grade Linux">
-     <center><h3>
-          If IVI was clashed, will reboot quicklly.<br>
-     </h3></center>
-</div>
-</div>
-</p>
-<p>
-<center>
-Demo change.<a href="index_s.html"><img class="demochange-img" src="image/demo_change.png" alt="Demo change"></a>
-</center>
-</p>
-<script>
-function QtClick(){
-     const res = fetch("cgi-bin/qt.cgi");
-}
-function HTML5Click(){
-     const res = fetch("cgi-bin/html5.cgi");
-}
-function FlutterClick(){
-     const res = fetch("cgi-bin/flutter.cgi");
-}
-function MomiClick(){
-     const res = fetch("cgi-bin/momi.cgi");
-}
-function SafeMomiClick(){
-     const res = fetch("cgi-bin/safemomi.cgi");
-}
-setTimeout(StatusGet, 1000);
-function StatusGet(){
-     fetch("cgi-bin/status.cgi")
-          .then(response => response.text())
-          .then(
-               data => {
-                    ShowGuestStatus(data);
-               }
-          );
-     setTimeout(StatusGet, 1000);
-}
-function ShowGuestStatus(jsondata){
-     var status = JSON.parse(jsondata);
+</body>
 
-     var row_count = status["guest-status"].length;
-     for(var i=0; i < row_count;i++) {
-          var name = status["guest-status"][i]["guest-name"];
-          var stat = status["guest-status"][i]["status"];
-          var elem = document.getElementById(name);
+<script type="text/javascript">
+var tabs = document.getElementById('momiwebtab').getElementsByTagName('a');
+var pages = document.getElementById('momiwebtabbody').getElementsByTagName('div');
 
-          if (elem != null) {
-               if (stat == "started") {
-                    elem.style.borderColor ="#68ff68";
-               } else if (stat == "shutdown") {
-                    elem.style.borderColor ="#c8c8ff";
-               } else if (stat == "dead") {
-                    elem.style.borderColor ="#ff8080";
-               } else {
-                    elem.style.borderColor ="#a0a0a0";
-               }
-          }
-     }
-}
-function ShowCpuUsage(jsondata){
-     var cpuusage = JSON.parse(jsondata);
+function changeTab() {
+    var targetid = this.href.substring(this.href.indexOf('#')+1,this.href.length);
 
-     var elem;
-     elem = document.getElementById("cpu0");
-     elem.value = cpuusage["cpuusage"]["0"];
-     elem = document.getElementById("cpu1");
-     elem.value = cpuusage["cpuusage"]["1"];
-     elem = document.getElementById("cpu2");
-     elem.value = cpuusage["cpuusage"]["2"];
-     elem = document.getElementById("cpu3");
-     elem.value = cpuusage["cpuusage"]["3"];
-     elem = document.getElementById("cpu4");
-     elem.value = cpuusage["cpuusage"]["4"];
-     elem = document.getElementById("cpu5");
-     elem.value = cpuusage["cpuusage"]["5"];
-     elem = document.getElementById("cpu6");
-     elem.value = cpuusage["cpuusage"]["6"];
-     elem = document.getElementById("cpu7");
-     elem.value = cpuusage["cpuusage"]["7"];
+    for(var i = 0; i < pages.length; i++) {
+        if( pages[i].id != targetid ) {
+            pages[i].style.display = "none";
+        } else {
+            pages[i].style.display = "block";
+        }
+    }
 
+    for(var i = 0; i < tabs.length; i++) {
+        tabs[i].style.zIndex = "0";
+    }
+    this.style.zIndex = "10";
+
+    return false;
 }
 
-function BombClick(){
-     const res = fetch("cgi-bin/bomb.cgi");
+for(var i = 0; i < tabs.length; i++) {
+    tabs[i].onclick = changeTab;
 }
+
+tabs[0].onclick();
 </script>
-
 </body>
 </html>
