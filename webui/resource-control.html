@@ -3,54 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="aglcontainerwebm.css" type="text/css" media="screen and (max-width:740px)">
-<link rel="stylesheet" href="aglcontainerweb.css" type="text/css" media="screen and (min-width:740px)">
-<title>Automotive Grade Linux Container Demo</title>
+<link rel="stylesheet" href="resource-control.css" type="text/css">
+<title>Resource Control</title>
 </head>
 <body id="resource-control">
-<div class="container-allitem">
-<div>
-<center><h2> Resource control demo </h2></center>
-<center><h3>
-When you push gear icon on momiscreen, mom ivi will cause heavy load status.<br>
-</h3></center>
-</div>
-<div class="container-ivi">
-     <div class="container-item" id="agl-momi-ivi-demo" onclick="MomiClick()">
-          <div class="container-item-box">
-               <img class="container-item-img" src="image/momilogo.png" alt="Automotive Grade Linux">
-               <h4 class="container-item-txt"><b>AGL MOMI IVI Demo</b><br><br>If container manager was not control cpu resource, instrument cluster will slow down.<br>It's unsafe.</h4>
-          </div>
-     </div>
-     <div class="container-item" id="agl-momi-ivi-demo-res" onclick="SafeMomiClick()">
-          <div class="container-item-box">
-               <img class="container-item-img" src="image/momilogo_s.png" alt="Automotive Grade Linux">
-               <h4 class="container-item-txt"><b>Safe AGL MOMI IVI Demo</b><br><br>If container manager was not control cpu resource, instrument cluster will keep stable behavior.<br>It's safe.</h4>
-          </div>
-     </div>
-</div>
+<p>
+<div class="guest-description">
+<h3>
+	Instrument cluster show the critical information for driver.<br>
+	It must not be affected from IVI status.<br>
+	This demo realize to instrument cluster resource protection from IVI.
+</h3>
 </div>
 <div class="cpu-usage">
-     <div class="cpu-usage-sub">
-     <div><label for="cpu0">cpu0:</label><br><progress class="cpu-progress" id="cpu0" max="100" value="0"></progress></div>
-     <div><label for="cpu1">cpu1:</label><br><progress class="cpu-progress" id="cpu1" max="100" value="0"></progress></div>
-     <div><label for="cpu2">cpu2:</label><br><progress class="cpu-progress" id="cpu2" max="100" value="0"></progress></div>
-     <div><label for="cpu3">cpu3:</label><br><progress class="cpu-progress" id="cpu3" max="100" value="0"></progress></div>
-     </div>
-     <div class="cpu-usage-sub">
-     <div><label for="cpu4">cpu4:</label><br><progress class="cpu-progress" id="cpu4" max="100" value="0"></progress></div>
-     <div><label for="cpu5">cpu5:</label><br><progress class="cpu-progress" id="cpu5" max="100" value="0"></progress></div>
-     <div><label for="cpu6">cpu6:</label><br><progress class="cpu-progress" id="cpu6" max="100" value="0"></progress></div>
-     <div><label for="cpu7">cpu7:</label><br><progress class="cpu-progress" id="cpu7" max="100" value="0"></progress></div>
-     </div>
+	<div class="cpu-usage-sub">
+		<div>
+			<label id="cpu0label">Share</label>
+			<p>cpu0:<meter class="cpu-meter" id="cpu0" min="0" max="100" optimum="40" low="50" high="80" value="0"></meter></p>
+		</div>
+		<div>
+			<label id="cpu1label">For IVI</label>
+			<p>cpu1:<meter class="cpu-meter" id="cpu1" min="0" max="100" optimum="40" low="50" high="80" value="0"></meter></p>
+		</div>
+		<div>
+			<label id="cpu2label">For IVI</label>
+			<p>cpu2:<meter class="cpu-meter" id="cpu2" min="0" max="100" optimum="40" low="50" high="80" value="0"></meter></p>
+		</div>
+		<div>
+			<label id="cpu3label">For IVI</label>
+			<p>cpu3:<meter class="cpu-meter" id="cpu3" min="0" max="100" optimum="40" low="50" high="80" value="0"></meter></p>
+		</div>
+	</div>
+	<div class="cpu-usage-sub">
+		<div>
+			<label id="cpu4label">For IVI</label>
+			<p>cpu4:<meter class="cpu-meter" id="cpu4" min="0" max="100" optimum="40" low="50" high="80" value="0"></meter></p>
+		</div>
+		<div>
+			<label id="cpu5label">For IVI</label>
+			<p>cpu5:<meter class="cpu-meter" id="cpu5" min="0" max="100" optimum="40" low="50" high="80" value="0"></meter></p>
+		</div>
+		<div>
+			<label id="cpu6label">For IVI</label>
+			<p>cpu6:<meter class="cpu-meter" id="cpu6" min="0" max="100" optimum="40" low="50" high="80" value="0"></meter></p>
+		</div>
+		<div>
+			<label id="cpu7label">Demo operation</label>
+			<p>cpu7:<meter class="cpu-meter" id="cpu7" min="0" max="100" optimum="40" low="50" high="80" value="0"></meter></p>
+		</div>
+	</div>
 </div>
+<div class="guest-selector">
+	<ul>
+		<li onclick="MomiClick()">
+			<div class="guest-selector-ico">
+				<img id="agl-momi-ivi-demo" src="image/momilogo.png">
+			</div>
+			<div class="guest-selector-text">
+				<h3>
+					Momi IVI is a demo IVI without CPU resource control.
+				</h3>
+				<h4>
+					If you push  fault injection button, IVI will do overload.<br>
+					When this system is not configured for resource control, IVI runaway/overload affect to instrument cluster.
+				</h4>
+			</div>
+		</li>
+		<li onclick="SafeMomiClick()">
+			<div>
+				<img id="agl-momi-ivi-demo-res" src="image/momilogo_s.png">
+			</div>
+			<div class="guest-selector-text">
+				<h3>
+					Safe Momi IVI is a demo IVI with CPU resource control.
+				</h3>
+				<h4>
+					If you push  fault injection button, IVI will do overload.<br>
+					When this system is configured for resource control, IVI runaway/overload do not affect to instrument cluster.
+				</h4>
+			</div>
+		</li>
+	</ul>
+</div>
+<div class="control-button">
+	<img id="mominjection" src="image/safemomi.png">
+	<h4>Fault injection button.</h4>
 </div>
 </p>
-<p>
-<center>
-<a href="index.html"><img class="demochange-img" src="image/demo_change.png" alt="Demo change"></a>Demo change.
-</center>
-</p>
+
 <script>
 function MomiClick(){
      const res = fetch("cgi-bin/momi.cgi");
@@ -58,7 +98,7 @@ function MomiClick(){
 function SafeMomiClick(){
      const res = fetch("cgi-bin/safemomi.cgi");
 }
-//setTimeout(StatusGet, 1000);
+setTimeout(StatusGet, 1000);
 function StatusGet(){
      fetch("cgi-bin/status.cgi")
           .then(response => response.text())
@@ -88,6 +128,15 @@ function ShowGuestStatus(jsondata){
           if (elem != null) {
                if (stat == "started") {
                     elem.style.borderColor ="#68ff68";
+
+                    var cpu0obj = document.getElementById("cpu0label");
+                    if (name == "agl-momi-ivi-demo") {
+                        cpu0obj.innerText = "Share";
+                    } else if (name == "agl-momi-ivi-demo-res") {
+                        cpu0obj.innerText = "For Cluster";
+                    } else {
+                        cpu0obj.innerText = "Share";
+                    }
                } else if (stat == "shutdown") {
                     elem.style.borderColor ="#c8c8ff";
                } else if (stat == "dead") {
