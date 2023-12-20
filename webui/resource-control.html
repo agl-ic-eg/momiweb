@@ -124,6 +124,7 @@ function ShowGuestStatus(jsondata){
     for(var i=0; i < row_count;i++) {
         var name = status["guest-status"][i]["guest-name"];
         var stat = status["guest-status"][i]["status"];
+        var role = status["guest-status"][i]["role-name"];
         var elem = document.getElementById(name);
 
         if (elem != null) {
@@ -131,15 +132,15 @@ function ShowGuestStatus(jsondata){
                 elem.style.backgroundColor ="#68ff68";
                 elem.style.borderColor ="#68ff68";
 
-                var cpu0obj = document.getElementById("cpu0label");
-                if (name == "agl-momi-ivi-demo") {
-                    cpu0obj.innerText = "Share";
-                } else if (name == "agl-momi-ivi-demo-res") {
-                    cpu0obj.innerText = "For Cluster";
-                } else {
-                    cpu0obj.innerText = "Share";
+                if (role == "ivi") {
+                    var cpu0obj = document.getElementById("cpu0label");
+                    if (name == "agl-momi-ivi-demo") {
+                        cpu0obj.innerText = "Share";
+                    } else if (name == "agl-momi-ivi-demo-res") {
+                        cpu0obj.innerText = "For Cluster";
+                    }
+                    setvalue = 1;
                 }
-                setvalue = 1;
             } else if (stat == "shutdown") {
                  elem.style.backgroundColor ="#c8c8ff";
                  elem.style.borderColor ="#c8c8ff";
@@ -155,7 +156,7 @@ function ShowGuestStatus(jsondata){
         }
     }
 
-    if (setvalue == 1) {
+    if (setvalue == 0) {
         var cpu0obj = document.getElementById("cpu0label");
         cpu0obj.innerText = "Share";
     }
