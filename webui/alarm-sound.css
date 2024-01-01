@@ -27,15 +27,16 @@ html {
         0px 4px 1px rgba(0, 0, 0, 0.2),
         4px 4px 5px rgba(0, 0, 0, 0.4),
         0px 0px 7px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    text-align: left;
     color: black;
     font-family: serif;
+    font-size: 1em;
     max-width: 100%;
     margin: 0.5em 1em 0.5em 1em;
 }
 
 .guest-selector{
-    height: 20em;
+    height: 30em;
     max-width: 100%;
     margin: 0 auto 0 auto;
     border-style: outset;
@@ -47,24 +48,6 @@ html {
     border-color: rgb(230, 230, 230);
     background-color:  rgb(245, 245, 245);
 }
-.guest-selector iframe{
-    height: 100%;
-    width: 100%;
-}
-.guest-selector ul{
-    height: 10em;
-    margin: 1em 1em 1em 1em;
-    padding: 0% 0% 0% 0%;
-    list-style: none;
-    text-align: center;
-}
-.guest-selector li{
-    text-align: left;
-    height: 100%;
-    margin-right: 8px;
-    display: flex;
-}
-
 .guest-selector-text h3{
     font-family: serif;
     margin: 0em 0em 0em 1em;
@@ -81,15 +64,8 @@ html {
 }
 
 .guest-selector img{
-    background-color: #e0e0e0;
-    border-width: 1em 1em 1em 1em;
-    border-top-left-radius: 1em;
-    border-top-right-radius: 1em;
-    border-bottom-right-radius: 1em;
-    border-bottom-left-radius: 1em;
-    border-style: double;
-    border-color: #e0e0e0;
-    height: 80%;
+    border-width: 0em 0em 0em 0em;
+    width: 100%;
 }
 
 .guest-selector div{
